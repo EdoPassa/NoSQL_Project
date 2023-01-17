@@ -6,7 +6,7 @@ import json
 
 
 def load_data_from_csv(path, filename):
-    df = pd.read_csv(path + filename)
+    df = pd.read_csv(path + '/' + filename)
     return df
 
 
