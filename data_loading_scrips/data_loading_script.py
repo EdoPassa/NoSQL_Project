@@ -47,3 +47,12 @@ def load_df_to_mongo(df, mongo_uri, mongo_db):
                     }]
                 }
             db.dialogs.insert_one(testo)  # insert the document in the collection
+
+
+def load_keywords_to_mongo(keywords_dict, mongo_uri, mongo_db):
+    """ Load a dictionary to a mongo database """
+    client = MongoClient(mongo_uri)
+    db = client[mongo_db]
+    for key, value in keywords_dict.items():
+        db.dialogs.update_one({'dialogueID': key}, {'$set': {'keywords': value}})
+

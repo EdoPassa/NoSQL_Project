@@ -27,6 +27,7 @@ def extract_keywords(df_dialog_text_concat, language, max_ngram_size, deduplicat
                                                 top=num_of_keywords, features=None)
     for index, row in df_dialog_text_concat.iterrows():
         keywords.append(custom_kw_extractor.extract_keywords(row['text']))
+        id_row.append(row['dialogueID'])
     keywords_dict = {}
     for i in range(len(keywords)):
         row_list = []
