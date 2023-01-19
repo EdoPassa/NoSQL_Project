@@ -14,7 +14,10 @@ if __name__ == '__main__':
     """
 
     df = dls.load_data_from_csv('Data', 'dialogueTextFirst505.csv')
-    keywords_dict = ke.extract_keywords(df, 'en', 2, 0.9, 'seqm', 1, 4)
+    df_keywords = ke.concat_dialogs(df)
+    keywords_dict = ke.extract_keywords(df_keywords, 'en', 2, 0.9, 'seqm', 1, 4)
     password = "8ST3ESqAjlUEbLUB"
     mongodb_url_string = "mongodb+srv://DB_Admin:" + password + "@cluster0.svikscz.mongodb.net"
+    dls.load_df_to_mongo(df, mongodb_url_string, 'Test505')
     dls.load_keywords_to_mongo(keywords_dict, mongodb_url_string, 'Test505')
+
