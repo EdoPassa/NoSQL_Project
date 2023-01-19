@@ -46,4 +46,4 @@ def load_df_to_mongo(df, mongo_uri, mongo_db):
                         "type": "Risposta"
                     }]
                 }
-            db.dialogs.insert_one(testo) # insert the document in the collection
+            db.dialogs.insert_one(testo)  # insert the document in the collection
