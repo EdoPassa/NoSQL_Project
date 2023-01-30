@@ -13,6 +13,7 @@ def concat_dialogs(df):
     df_dialog_text_concat = pd.concat([df_dialog_questions, df_dialog_answers], ignore_index=True)
     df_dialog_text_concat = df_dialog_text_concat.groupby(['dialogueID'])['text'].apply(
         lambda x: ' '.join(x)).reset_index()
+    df_dialog_text_concat['text'] = df_dialog_text_concat['text'].str.lower()
     return df_dialog_text_concat
 
 
