@@ -38,3 +38,15 @@ def extract_keywords(df_dialog_text_concat, language, max_ngram_size, deduplicat
 
     return keywords_dict
 
+def extract_keywords_from_string(string, language, max_ngram_size, deduplication_thresold, deduplication_algo,
+                                 window_size, num_of_keywords):
+    """ Extract keywords from a string """
+    custom_kw_extractor = yake.KeywordExtractor(lan=language, n=max_ngram_size, dedupLim=deduplication_thresold,
+                                                dedupFunc=deduplication_algo, windowsSize=window_size,
+                                                top=num_of_keywords, features=None)
+    keywords_raw = custom_kw_extractor.extract_keywords(string)
+    keywords = []
+    for i in range(len(keywords_raw[0])):
+        keywords.append(keywords_raw[0][i][0])
+    return keywords
+

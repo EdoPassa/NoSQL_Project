@@ -56,3 +56,10 @@ def load_keywords_to_mongo(keywords_dict, mongo_uri, mongo_db):
     for key, value in keywords_dict.items():
         db.dialogs.update_one({'dialogueID': key}, {'$set': {'keywords': value}})
 
+
+def query_mongo(mongo_uri, mongo_db, kw_question):
+    """ Query the mongo database and return the results """
+    client = MongoClient(mongo_uri)
+    db = client[mongo_db]
+    results = db.dialogs.find({"keywords": {'$in': kw_question}}).limit(5)
+    return results
