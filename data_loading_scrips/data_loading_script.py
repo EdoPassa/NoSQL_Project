@@ -1,13 +1,12 @@
 import pandas as pd
 import pymongo
-import dns
 from pymongo import MongoClient
 import json
 
 
 def load_data_from_csv(path, filename):
     """ Load data from csv file and return a pandas dataframe """
-    df = pd.read_csv(path + '/' + filename)  # read csv file
+    df = pd.read_csv(r'Data\dialogueText.csv')  # read csv file
     return df
 
 
@@ -61,5 +60,6 @@ def query_mongo(mongo_uri, mongo_db, kw_question):
     """ Query the mongo database and return the results """
     client = MongoClient(mongo_uri)
     db = client[mongo_db]
-    results = db.dialogs.find({"keywords": {'$in': kw_question}}).limit(5)
+    results = db.dialogs.find({"keywords": {'$in': kw_question}}).limit(3)
     return results
+
