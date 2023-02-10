@@ -15,12 +15,14 @@ def load_keywords(path, filename, mongodb_url_string, database_name):
     return
 
 
-def query_new_question(user_question):
+def query_new_question(user_question, mongo_uri, database):
+    """ Query the mongo database and print the results"""
     print('\n')
     kw_question = ke.extract_keywords_from_string(user_question, 'en', 2, 0.9, 'seqm', 1, 4)
-    conversations = dls.query_mongo('mongodb+srv://DB_Admin:8ST3ESqAjlUEbLUB@cluster0.svikscz.mongodb.net',
-                                    'customer_support', kw_question)
+    conversations = dls.query_mongo(mongo_uri,
+                                    database, kw_question) # query the mongo database
     doc_list = []
+    # print the results
     for doc in conversations:
         doc_list.append(doc)
     for doc in doc_list:
@@ -36,7 +38,5 @@ def query_new_question(user_question):
 
 
 if __name__ == '__main__':
-    # load_keywords('Data', 'dialogueText.csv', 'mongodb+srv://DB_Admin:8ST3ESqAjlUEbLUB@cluster0.svikscz.mongodb.net',
-    #              'customer_support')
-    query_new_question(input("What's your question?: "))
+    query_new_question(input("What's your question?: "),'xxx','xxx') # replace xxx with your mongo url and database name
 
